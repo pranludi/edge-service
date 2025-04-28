@@ -25,12 +25,15 @@ extra["testcontainersVersion"] = "1.21.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+  implementation("org.springframework.boot:spring-boot-starter-security")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
   implementation("org.springframework.cloud:spring-cloud-starter-config")
   implementation("org.springframework.cloud:spring-cloud-starter-gateway")
   implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
   implementation("org.springframework.session:spring-session-data-redis")
   //
   testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("org.springframework.security:spring-security-test")
   testImplementation("org.testcontainers:junit-jupiter")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
