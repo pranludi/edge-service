@@ -1,7 +1,6 @@
 package com.polarbookshop.edgeservice.config;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static reactor.core.publisher.Mono.when;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,25 @@ class SecurityConfigTests {
 
     @MockitoBean
     ReactiveClientRegistrationRepository clientRegistrationRepository;
+
+    @Test
+    void whenLogoutNotAuthenticatedAndNoCsrfTokenThen403() {
+        webClient
+            .post()
+            .uri("/logout")
+            .exchange()
+            .expectStatus().isForbidden();
+    }
+
+    @Test
+    void whenLogoutAuthenticatedAndNoCsrfTokenThen403() {
+        webClient
+            .mutateWith(SecurityMockServerConfigurers.mockOidcLogin())
+            .post()
+            .uri("/logout")
+            .exchange()
+            .expectStatus().isForbidden();
+    }
 
     @Test
     void whenLogoutAuthenticatedAndWithCsrfTokenThen302() {
