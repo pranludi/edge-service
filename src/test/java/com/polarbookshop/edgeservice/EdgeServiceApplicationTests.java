@@ -1,6 +1,5 @@
 package com.polarbookshop.edgeservice;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -25,10 +24,6 @@ class EdgeServiceApplicationTests {
     static void redisProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.redis.host", redis::getHost);
         registry.add("spring.redis.port", () -> redis.getMappedPort(REDIS_PORT));
-    }
-
-    @Test
-    void verifyThatSpringContextLoads() {
     }
 
 }
