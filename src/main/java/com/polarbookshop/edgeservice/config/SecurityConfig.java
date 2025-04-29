@@ -43,7 +43,9 @@ public class SecurityConfig {
                     oidcLogoutSuccessHandler(clientRegistrationRepository)
                 )
             )
-            .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
+            )
             .build();
     }
 
