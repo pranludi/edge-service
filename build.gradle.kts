@@ -24,6 +24,7 @@ extra["springCloudVersion"] = "2024.0.1"
 extra["testcontainersVersion"] = "1.21.0"
 
 dependencies {
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
   implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
@@ -31,6 +32,10 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-gateway")
   implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
   implementation("org.springframework.session:spring-session-data-redis")
+  //
+  runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+  runtimeOnly("io.opentelemetry.javaagent:opentelemetry-javaagent:2.15.0")
+  runtimeOnly("io.github.resilience4j:resilience4j-micrometer")
   //
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.security:spring-security-test")
@@ -47,6 +52,10 @@ dependencyManagement {
 
 tasks.withType<Test> {
   useJUnitPlatform()
+}
+
+springBoot {
+  buildInfo()
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
